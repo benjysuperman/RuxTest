@@ -56,4 +56,7 @@ Feel free to fork the project and submit pull requests. You can also open issues
 - Benji
 ---
 
+## Develop
+Created a new branch for dev
+
 Enjoy exploring the Rux Game app with its interactive and fun touchpoints! For any queries or further development ideas, keep the contributions flowing.
