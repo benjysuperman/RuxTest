@@ -11,27 +11,34 @@ import java.util.Map;
 import java.util.Objects;
 
 public class DatasHelper {
-    private static Map<String, StringBuilder> descriptions = new HashMap<>();
 
-    public static String getDescription(AssetManager assetManager, String key) {
-        if (descriptions.containsKey(key)) {
-            return Objects.requireNonNull(descriptions.get(key)).toString();
+    private static Map<String, Map<String, StringBuilder>> loadedDatas = new HashMap<>();
+
+    public static String getKeyPairValueFromAssetsFile(String fileName, AssetManager assetManager, String key) {
+        if (loadedDatas.containsKey(fileName)) {
+            if (Objects.requireNonNull(loadedDatas.get(fileName)).containsKey(key)) {
+                return Objects.requireNonNull(Objects.requireNonNull(loadedDatas.get(fileName)).get(key)).toString();
+            } else {
+                return "";
+            }
         }
-        StringBuilder description = new StringBuilder();
+        HashMap<String, StringBuilder> fileEntries = new HashMap<>();
+        loadedDatas.put(fileName, fileEntries);
+        StringBuilder fileData = new StringBuilder();
         try {
-            InputStream is = assetManager.open("descriptions");
+            InputStream is = assetManager.open(fileName);
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith(key + ";")) {
-                    description.append(line.split(";", 2)[1]);
-                    descriptions.put(key, description);
+                    fileData.append(line.split(";", 2)[1]);
+                    Objects.requireNonNull(loadedDatas.get(fileName)).put(key, fileData);
                 }
             }
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return description.toString();
+        return Objects.requireNonNull(Objects.requireNonNull(loadedDatas.get(fileName)).get(key)).toString();
     }
 }

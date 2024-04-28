@@ -108,12 +108,12 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         if( launch == ANIM_GAME && characters == null){
             characters = new ArrayList<AnimCharacter>() {{
-                add((new Seiya()).setDescription(DatasHelper.getDescription(getAssets(), "seiya")));
-                add((new Shiryu()).setDescription(DatasHelper.getDescription(getAssets(), "shiryu")));
-                add((new Andromeda()).setDescription(DatasHelper.getDescription(getAssets(), "andromeda")));
-                add((new Athena()).setDescription(DatasHelper.getDescription(getAssets(), "athena")));
-                add((new Doraemon()).setDescription(DatasHelper.getDescription(getAssets(), "doraemon")));
-                add((new Dorami()).setDescription(DatasHelper.getDescription(getAssets(), "dorami")));
+                add((new Seiya()).setDescription(DatasHelper.getKeyPairValueFromAssetsFile("descriptions",getAssets(), "seiya")));
+                add((new Shiryu()).setDescription(DatasHelper.getKeyPairValueFromAssetsFile("descriptions",getAssets(), "shiryu")));
+                add((new Andromeda()).setDescription(DatasHelper.getKeyPairValueFromAssetsFile("descriptions",getAssets(), "andromeda")));
+                add((new Athena()).setDescription(DatasHelper.getKeyPairValueFromAssetsFile("descriptions",getAssets(), "athena")));
+                add((new Doraemon()).setDescription(DatasHelper.getKeyPairValueFromAssetsFile("descriptions",getAssets(), "doraemon")));
+                add((new Dorami()).setDescription(DatasHelper.getKeyPairValueFromAssetsFile("descriptions",getAssets(), "dorami")));
             }};
         }
         Random random = new Random();
